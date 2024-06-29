@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Scraper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Google Maps Scraper</h1>
+        <form id="scrapeForm">
+            <div class="form-group">
+                <label for="keyword">Keyword</label>
+                <input type="text" class="form-control" id="keyword" placeholder="Enter keyword" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" placeholder="Enter location" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Scrape</button>
+        </form>
+        <div id="result" class="mt-4"></div>
+    </div>
+
+    <script>
+        document.getElementById('scrapeForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const keyword = document.getElementById('keyword').value;
+            const location = document.getElementById('location').value;
+
+            try {
+                const response = await fetch(`/scrape?keyword=${encodeURIComponent(keyword)}&location=${encodeURIComponent(location)}`);
+                const data = await response.json();
+                
+                let resultDiv = document.getElementById('result');
+                if (response.ok) {
+                    resultDiv.innerHTML = `<div class="alert alert-success">Scraping complete! Download results: <a href="${data.result}" download>${data.result}</a></div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${data.error}</div>`;
+                }
+            } catch (error) {
+                document.getElementById('result').innerHTML = `<div class="alert alert-danger">An error occurred: ${error.message}</div>`;
+            }
+        });
+    </script>
+</body>
+</html>
