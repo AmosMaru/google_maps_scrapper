@@ -13,7 +13,7 @@ async def scrape_google_maps(keyword, location):
         page = await browser.new_page()
         try:
             await page.goto(google_url)
-            await page.wait_for_selector('[jstcache="3"]', timeout=60000)  # Increase timeout to 60 seconds (60000ms)
+            await page.wait_for_selector('[jstcache="3"]', timeout=None)  # Increase timeout to 60 seconds (60000ms)
             scrollable = await page.query_selector('xpath=/html/body/div[2]/div[3]/div[8]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[1]/div[1]')
             if not scrollable:
                 print('Scrollable element not found.')
