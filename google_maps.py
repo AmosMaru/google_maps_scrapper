@@ -81,7 +81,7 @@ async def scrape_google_maps(keyword, location):
             with open(name_sheet, 'w', newline='', encoding='utf-8') as csvfile:
                 csvfile.write(csv_header)
                 csvfile.write('\n'.join(csv_rows))
-                
+
             await browser.close()
             return results
 
@@ -104,7 +104,7 @@ def scrape():
     return result
 
 if __name__ == '__main__':
-    app.run(debug=True , port = 5020)
+    app.run(host="0.0.0.0",debug=True , port = 5522)
 
 
-# send a GET request to http://localhost:5020/scrape?keyword=dentist&location=juja
+# send a GET request to http://localhost:5522/scrape?keyword=dentist&location=juja

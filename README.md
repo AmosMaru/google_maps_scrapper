@@ -41,14 +41,14 @@ To scrape Google Maps for places, send a GET request to the /scrape endpoint wit
 Open your web browser and navigate to:
 
 ```bash
- http://localhost:5020/scrape?keyword=dentist&location=Nakuru
+ http://localhost:5522/scrape?keyword=dentist&location=Nakuru
 
 ```
 
 Or use curl from the command line:
 
 ```
-curl "http://localhost:5020/scrape?keyword=dentist&location=Nakuru"
+curl "http://localhost:5522/scrape?keyword=dentist&location=Nakuru"
 ```
 
 ## Response
