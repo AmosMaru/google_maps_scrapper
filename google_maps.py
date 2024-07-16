@@ -137,6 +137,10 @@ async def scrape_google_maps(keyword: str, location: str):
             raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.get("/")   
+async def read_root():
+    return {"Hello": "World"}
+
 @app.get("/scrape")
 async def scrape(keyword: str = Query(...), location: str = Query(...)):
     if not keyword or not location:
@@ -152,3 +156,4 @@ async def scrape(keyword: str = Query(...), location: str = Query(...)):
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=5522)
+#uvicorn google_maps:app --reload --port=5522 --host="0.0.0.0" --log-level=debug
